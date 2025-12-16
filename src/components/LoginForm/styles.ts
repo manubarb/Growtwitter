@@ -2,10 +2,12 @@ import styled from 'styled-components'
 
 export const FormWrapper = styled.form`
   display: flex;
-  padding: 2rem;
+  padding: 5em 1.5em;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   border-radius: 0 10px 10px 0;
+  background-color: #ffff;
+  height: 100%;
 
   h3 {
     color: #4d4d4dff;
@@ -23,18 +25,20 @@ export const FormWrapper = styled.form`
   }
 
   input {
-    width: 15vw;
-    height: 3vh;
-    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
     border: solid 1px #e7e7e7ff;
   }
 `
 
 export const Button = styled.button`
   border: 0;
-  padding: .5vw 5vw;
-	border-radius: 5px;
+  padding: .75vw 5vw;
+	border-radius: 8px;
 	background-color: #1DA1F2;
 	color: #ffff;
+  margin-top: 10px;
+  cursor: pointer;
 	
 `
