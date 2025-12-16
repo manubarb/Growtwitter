@@ -4,11 +4,14 @@ export function LoginForm() {
   return (
     <>
       <FormWrapper>
-        <label>Username</label>
-        <input type="text" name="username" />
+        <div>
+        <h3>Entrar no Growtwitter</h3>
+          <label htmlFor="username">Username</label>
+          <input type="text" name="username" />
 
-        <label>Password</label>
-        <input type="text" name="password" />
+          <label htmlFor="password">Password</label>
+          <input type="text" name="password" />
+        </div>
 
         <Button>Entrar</Button>
       </FormWrapper>
