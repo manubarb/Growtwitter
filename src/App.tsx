@@ -1,11 +1,12 @@
-import { LoginCard } from "./components/LoginCard"
+import { AppRoutes } from "./routes"
 import { GlobalStyle } from "./styles/global"
 
 function App() {
   return (
     <>
     <GlobalStyle />
-    <LoginCard/>
+    <AppRoutes />
+    
     </>
   )
 }
