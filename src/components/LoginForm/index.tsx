@@ -1,11 +1,12 @@
 import { useState, type FormEvent } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { FormWrapper, Button } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 export function LoginForm() {
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
-
+  const navigate = useNavigate()
   const { signIn, isLoading } = useAuth()
 
   async function handleSubmit(event: FormEvent) {
@@ -13,6 +14,7 @@ export function LoginForm() {
 
     const success = await signIn(username, password)
     if(success){
+      navigate("/home", { replace: true })
       console.log('logado')
     }else{
       console.log('erro ao logar')
