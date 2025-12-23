@@ -34,11 +34,10 @@ export const FormWrapper = styled.form`
 
 export const Button = styled.button`
   border: 0;
-  padding: .75vw 5vw;
-	border-radius: 8px;
-	background-color: #1DA1F2;
-	color: #ffff;
+  padding: 0.75vw 5vw;
+  border-radius: 8px;
+  background-color: #1da1f2;
+  color: #ffff;
   margin-top: 10px;
   cursor: pointer;
-	
 `

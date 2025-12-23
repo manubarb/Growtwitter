@@ -8,24 +8,23 @@ export const Wrapper = styled.div`
   align-items: stretch;
   width: 50%;
   margin: 0 auto;
-  margin-top: 25vh; 
+  margin-top: 25vh;
   max-height: 80vh;
-  
+
   @media (max-width: 1024px) {
     width: 70%;
     margin-top: 20vh;
     max-height: 75vh;
   }
-  
+
   @media (max-width: 768px) {
     width: 85%;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
     margin-top: 15vh;
-    max-height: none; 
+    max-height: none;
     min-height: auto;
   }
-  
 `
 export const TextSection = styled.div`
   display: flex;
@@ -33,7 +32,7 @@ export const TextSection = styled.div`
   gap: 5px;
   padding: 2rem;
   color: #ffff;
-  background-color: #1DA1F2;
+  background-color: #1da1f2;
   font-size: 16px;
   border-radius: 10px 0 0 10px;
   width: 100%;
@@ -52,10 +51,9 @@ export const TextSection = styled.div`
 `
 
 export const FormContainer = styled.div`
-  width: 100%; 
+  width: 100%;
   display: flex;
-  
-  
+
   form {
     width: 100%;
     height: 100%;

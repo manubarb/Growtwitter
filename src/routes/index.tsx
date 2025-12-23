@@ -4,17 +4,17 @@ import { Home } from '../pages/Home'
 import { PrivateRoute } from '../components/PrivateRoute'
 import { PublicRoute } from '../components/PublicRoute'
 
-export function AppRoutes(){
-    return(
-        <BrowserRouter>
-            <Routes>
-                <Route element={<PublicRoute />}>
-                    <Route path="/login" element={<Login />} />
-                </Route>
-                <Route element={<PrivateRoute />}>
-                    <Route path="/home" element={<Home />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    )
+export function AppRoutes() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/home" element={<Home />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }

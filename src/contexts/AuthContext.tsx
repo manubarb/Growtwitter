@@ -32,25 +32,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         localStorage.removeItem('@App:token')
       }
     }
-    
-    setIsLoading(false)// finaliza estado de loading
+
+    setIsLoading(false) // finaliza estado de loading
   }, [])
 
   async function signIn(username: string, password: string) {
-    try{
-        const response = await authAPI.login(username, password)        
-        const { authToken, authUser } = response.data.data
-        // usuário persiste após refresh
-        localStorage.setItem('@App:token', authToken)
-        localStorage.setItem('@App:user', JSON.stringify(authUser))
-        setUser(authUser)// estado do usuário logado
-        // configura cabeçalho "Authorization" de todas as próximas requisições
-        api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
+    try {
+      const response = await authAPI.login(username, password)
+      const { authToken, authUser } = response.data.data
+      // usuário persiste após refresh
+      localStorage.setItem('@App:token', authToken)
+      localStorage.setItem('@App:user', JSON.stringify(authUser))
+      setUser(authUser) // estado do usuário logado
+      // configura cabeçalho "Authorization" de todas as próximas requisições
+      api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
 
-        return true
-    }catch(e){
-        console.log(e)
-        return false
+      return true
+    } catch (e) {
+      console.log(e)
+      return false
     }
   }
 

@@ -1,9 +1,9 @@
-import { LoginCard } from "../../components/LoginCard";
+import { LoginCard } from '../../components/LoginCard'
 
 export function Login() {
   return (
     <>
-    <LoginCard/>
+      <LoginCard />
     </>
   )
 }
