@@ -17,6 +17,13 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+
 export const authAPI = {
   login: (username: string, password: string) => 
     api.post('/auth/login', { username, password })
