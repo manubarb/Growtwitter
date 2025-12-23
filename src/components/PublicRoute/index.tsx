@@ -1,6 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 
 export function PublicRoute() {
-  const token = localStorage.getItem('@App:token')
-  return token ? <Navigate to="/home" replace /> : <Outlet />
+  const { signed, isLoading } = useAuth() 
+  if (isLoading) return null // adicionar elemento visual de carregamento
+
+  return signed ? <Navigate to="/home" replace /> : <Outlet />
 }

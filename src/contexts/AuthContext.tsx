@@ -21,15 +21,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // tenta buscar o usuário salvo no localstorage
+    // tenta buscar usuário e token da sessão
     const storedUser = localStorage.getItem('@App:user')
+    const storedToken = localStorage.getItem('@App:token')
     // se true, transforma json em objeto e salva no estado
-    if (storedUser) {
+    if (storedUser && storedToken) {
       try {
         setUser(JSON.parse(storedUser))
+        //se houver refresh, cabeçalho é reconfigurado
+        api.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`
       } catch {
-        localStorage.removeItem('@App:user') // se false, limpa tudo
-        localStorage.removeItem('@App:token')
+        localStorage.clear() // caso os dados em localstorage estejam corrompidos
       }
     }
 
@@ -44,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('@App:token', authToken)
       localStorage.setItem('@App:user', JSON.stringify(authUser))
       setUser(authUser) // estado do usuário logado
-      // configura cabeçalho "Authorization" de todas as próximas requisições
+      // configura cabeçalho das próximas requisições
       api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
 
       return true
