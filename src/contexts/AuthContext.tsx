@@ -12,7 +12,6 @@ interface AuthData {
   user: User | null
   isLoading: boolean
   signIn: (username: string, password: string) => Promise<boolean>
-  signOut?: () => void // faço quando tiver pag inicial
 }
 
 export const AuthContext = createContext<AuthData>({} as AuthData)
@@ -54,8 +53,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return false
     }
   }
-
-// sign out quando fizer a pagina inicial
 
   return (
     <AuthContext.Provider value={{ signed: !!user, user, isLoading, signIn }}>

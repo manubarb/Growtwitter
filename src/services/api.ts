@@ -20,6 +20,9 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    if (error.response && error.response.status === 401) {
+      logout()
+    }
     return Promise.reject(error)
   }
 )
@@ -27,4 +30,10 @@ api.interceptors.response.use(
 export const authAPI = {
   login: (username: string, password: string) => 
     api.post('/auth/login', { username, password })
+}
+
+export function logout(){
+  localStorage.removeItem('@App:token')
+  localStorage.removeItem('@App:user')
+  window.location.href = '/login'
 }
