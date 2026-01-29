@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from 'react'
 import { useAuth } from '../../hooks/useAuth'
-import { FormWrapper, Button } from './styles'
+// import { FormWrapper, Button } from './styles'
 import { useNavigate } from 'react-router-dom'
+import Button from '@mui/material/Button'
+import { Box, Stack, TextField, Typography } from '@mui/material'
 
 export function LoginForm() {
   const [username, setUsername] = useState('')
@@ -23,32 +25,38 @@ export function LoginForm() {
 
   return (
     <>
-      <FormWrapper onSubmit={handleSubmit}>
-        <div>
-          <h3>Entrar no Growtwitter</h3>
-          <label htmlFor="username">Username</label>
-          <input
+      <Box component="form" onSubmit={handleSubmit}>
+        <Stack spacing={2}>
+           <Typography variant='h5'>Entrar no Growtwitter</Typography>
+           <TextField
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             type="text"
             id="username"
+            label="username"
             autoComplete="true"
-          />
+            variant="outlined" 
+           />
 
-          <label htmlFor="password">Password</label>
-          <input
+           <TextField
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             id="password"
+            label="password"
             autoComplete="true"
-          />
-        </div>
+            variant="outlined" 
+           />
 
-        <Button type="submit" disabled={isLoading}>
-          Entrar
-        </Button>
-      </FormWrapper>
+          <Button 
+          type="submit" 
+          disabled={isLoading}
+          variant="contained"
+          >
+            Entrar
+          </Button>
+        </Stack>
+      </Box>
     </>
   )
 }

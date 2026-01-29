@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+/*import styled from 'styled-components'
 
 export const FormWrapper = styled.form`
   display: flex;
@@ -40,4 +40,4 @@ export const Button = styled.button`
   color: #ffff;
   margin-top: 10px;
   cursor: pointer;
-`
+`*/
