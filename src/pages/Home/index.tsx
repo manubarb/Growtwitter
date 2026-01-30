@@ -1,4 +1,4 @@
-// deve conter o feed de tweets do usuário logado
+/* deve conter o feed de tweets do usuário logado
 import { Explore } from '../../components/Explore'
 import { Feed } from '../../components/Feed'
 import { SideBar } from '../../components/SideBar'
@@ -14,4 +14,4 @@ export function Home() {
       </Container>
     </>
   )
-}
+}*/
