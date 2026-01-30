@@ -38,6 +38,22 @@ export const theme = createTheme({
         h5: {
             fontWeight: 600
         }
-    }
+    },
+    components: {
+        MuiOutlinedInput: {
+            styleOverrides: {
+                input: ({ theme }) => ({
+                ...(theme.palette.mode === 'dark'
+                    ? {
+                        '&:-webkit-autofill': {
+                        WebkitBoxShadow:
+                            '0 0 0 1000px #32424dff inset',
+                        }
+                    }
+                    : {}),
+                }),
+            },
+        },
+    },
 
 })
