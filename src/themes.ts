@@ -9,12 +9,15 @@ export const theme = createTheme({
                     main: '#188bd0'
                 },
                 secondary: {
-                    main: '#f5f5f5'
+                    main: '#c1c4c9ff'
                 },
                 background: {
                 default: '#efefefff',
                 paper: '#ffffffff',
                 },
+                text: {
+                    primary: 'grey.900'
+                }
             },
         },
         dark: {
@@ -24,12 +27,15 @@ export const theme = createTheme({
                     main: '#106191'
                 },
                 secondary: {
-                    main: '#f5f5f5'
+                    main: '#808696ff'
                 },
                 background: {
                 default: '#001725ff',
                 paper: '#252f36ff',
                 },
+                text: {
+                    primary: '#ffff'
+                }
             },
         }
     },
