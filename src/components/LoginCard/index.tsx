@@ -38,7 +38,7 @@ export function LoginCard() {
                 container
                 direction="column"
                 spacing={1}
-                sx={{color: 'secondary.main'}}
+                sx={{color: 'white'}}
               >
                 <Typography variant="h5">Growtwitter</Typography>
                 <Typography variant="subtitle2">
