@@ -12,6 +12,7 @@ interface AuthData {
   user: User | null
   isLoading: boolean
   signIn: (username: string, password: string) => Promise<boolean>
+  isSigningIn: boolean
 }
 
 export const AuthContext = createContext<AuthData>({} as AuthData)
@@ -19,6 +20,7 @@ export const AuthContext = createContext<AuthData>({} as AuthData)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isSigningIn, setIsSigningIn] = useState(false)
 
   useEffect(() => {
     // tenta buscar usuário e token da sessão
@@ -39,6 +41,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   async function signIn(username: string, password: string) {
+    setIsSigningIn(true)
+
     try {
       const response = await authAPI.login(username, password)
       const { authToken, authUser } = response.data.data
@@ -53,11 +57,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch (e) {
       console.log(e)
       return false
-    }
+    } finally {
+    setIsSigningIn(false)
+  }
   }
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, isLoading, signIn }}>
+    <AuthContext.Provider value={{ signed: !!user, user, isLoading, signIn, isSigningIn }}>
       {children}
     </AuthContext.Provider>
   )

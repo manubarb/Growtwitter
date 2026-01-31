@@ -8,7 +8,7 @@ export function LoginForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-  const { signIn, isLoading } = useAuth()
+  const { signIn, isSigningIn } = useAuth()
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -49,7 +49,8 @@ export function LoginForm() {
 
           <Button 
           type="submit" 
-          disabled={isLoading}
+          loading={isSigningIn}
+          loadingPosition="center"
           variant="contained"
           >
             Entrar
