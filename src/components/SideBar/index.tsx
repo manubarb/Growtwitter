@@ -53,6 +53,25 @@ export function SideBar() {
             <PersonRoundedIcon style={{ width: 20}}/>
             <Typography variant='body2'>Perfil</Typography>
           </Box>
+
+          <Box
+          marginTop={2}
+          >
+            <Button 
+            size="small"
+            variant="contained"
+            sx={{ 
+              borderRadius: 10, 
+              px: 6, 
+              textTransform: 'none', 
+              fontSize: 12, 
+              fontWeight: 400 
+            }}
+            
+            >
+            Twettar
+            </Button>
+          </Box>
           
         </Stack>
       

@@ -34,7 +34,7 @@ export function Explore() {
           <Typography variant='subtitle2'>Oscar 2026</Typography>
         </Box>
 
-        <Link href='#' variant='caption'>Mostrar mais</Link>
+        <Link sx={{ marginTop: 1 }} href='#' variant='caption'>Mostrar mais</Link>
 
       </Stack>
     </>
