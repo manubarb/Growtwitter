@@ -11,16 +11,15 @@ export function Home() {
       <CssBaseline />
       <Grid
       container
-      spacing={5}
       columns={{ sm: 4, md: 6, lg: 12 }}
       flexDirection='row'
       sx={{
-        justifyContent: 'space-evenly',
-        alignItems: "stretch"
+        justifyContent: 'center',
+        alignItems: 'flex-start'
       }}
       >
         <Grid
-        size={2}
+        size={3}
         >
           <SideBar />
         </Grid>
@@ -30,12 +29,12 @@ export function Home() {
         flexItem
         sx={{
           borderColor: 'secondary.main',
-          height: '100vh'
+          
         }}
         />
 
         <Grid
-        size={2}
+        size={4}
         >
           <Feed />
         </Grid>
@@ -44,13 +43,15 @@ export function Home() {
         orientation="vertical" 
         flexItem
         sx={{
-          borderColor: 'secondary.main',
-          height: '100vh'
+          borderColor: 'secondary.main'        
         }}
         />
 
         <Grid
-        size={2}
+        size={3}
+        padding={3}
+        marginTop= {1}
+
         >
           <Explore />
         </Grid>
