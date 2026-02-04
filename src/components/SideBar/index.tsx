@@ -13,7 +13,7 @@ export function SideBar() {
       sx={{
         width: '10rem',
         height: '100vh',
-        marginLeft: 25,
+        marginLeft: 20,
         justifyContent: "space-between"
 
       }}

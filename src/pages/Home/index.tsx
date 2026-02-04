@@ -19,7 +19,7 @@ export function Home() {
       }}
       >
         <Grid
-        size={3}
+        size={2}
         >
           <SideBar />
         </Grid>
