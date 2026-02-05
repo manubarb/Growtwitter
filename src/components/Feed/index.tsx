@@ -1,7 +1,22 @@
+import { Box, AppBar, Toolbar, Typography } from "@mui/material"
+
 export function Feed() {
   return (
     <>
-      <h1>feed</h1>
+        <Box>
+          <AppBar position="sticky" variant='outlined' sx={{ backgroundColor: 'transparent'}}>
+            <Toolbar>
+              <Typography 
+              variant="body1" 
+              component="div"
+              color='textPrimary'
+              fontWeight={500}
+              >
+                Página Inicial
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </Box>
     </>
   )
 }
