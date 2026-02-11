@@ -31,7 +31,8 @@ api.interceptors.response.use(
 export const authAPI = {
   login: (username: string, password: string) =>
     api.post('/auth/login', { username, password }),
-  getTweets: (userId: string) => api.get<{data : Tweet[]}>(`/users/${userId}/tweets`)
+  getTweets: (userId: string) => api.get<{data : Tweet[]}>(`/users/${userId}/tweets`),
+  createTweet: (content: string) => api.post('/tweets', { content })
 }
 
 export function logout() {
