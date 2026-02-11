@@ -1,7 +1,9 @@
 import { Box, Avatar, Stack, Typography, Grid, Divider } from "@mui/material"
 import { useFetchTweets } from "../../hooks/useFetchTweets"
 import { useEffect } from "react"
-
+import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlineOutlined'
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
 export function TweetList(){
     const { tweetData, fetchTweets, loading } = useFetchTweets()
@@ -57,11 +59,12 @@ export function TweetList(){
               justifyContent='space-between'
               display='flex'
               flexDirection='row'
+              marginTop={1}
               >
 
-                <Grid >a</Grid>
-                <Grid >b</Grid>
-                <Grid >c</Grid>
+                <Grid ><ChatBubbleOutlineOutlinedIcon fontSize="inherit"/></Grid>
+                <Grid ><FavoriteBorderOutlinedIcon fontSize="inherit"/></Grid>
+                <Grid ><DeleteOutlineOutlinedIcon fontSize="inherit"/></Grid>
 
               </Grid>
               </Stack>
