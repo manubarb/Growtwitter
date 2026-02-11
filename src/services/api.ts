@@ -1,4 +1,5 @@
 import axios from 'axios'
+import type { Tweet } from '../contexts/TweetContext'
 
 const baseURL = import.meta.env.VITE_API_BASE_URL
 
@@ -30,6 +31,7 @@ api.interceptors.response.use(
 export const authAPI = {
   login: (username: string, password: string) =>
     api.post('/auth/login', { username, password }),
+  getTweets: (userId: string) => api.get<{data : Tweet[]}>(`/users/${userId}/tweets`)
 }
 
 export function logout() {
