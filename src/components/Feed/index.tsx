@@ -1,7 +1,7 @@
-import { Box, AppBar, Toolbar, Typography, Stack, Avatar, Divider, Grid } from "@mui/material"
-import { Tweet } from "../Tweet"
+import { Box, AppBar, Toolbar, Typography } from "@mui/material"
+import { TweetList } from "../TweetList"
 
-export function Feed() {
+export function Feed() {  
   return (
     <>
         <Box>
@@ -19,7 +19,7 @@ export function Feed() {
           </AppBar>
         </Box>
 
-        <Tweet />
+        <TweetList />
 
     </>
   )
