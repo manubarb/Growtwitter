@@ -1,12 +1,25 @@
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { logout } from '../../services/api'
 import Logo from '../Logo/index'
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
 import TagRoundedIcon from '@mui/icons-material/TagRounded'
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
 import Avatar from '@mui/material/Avatar'
+import React, { useState, type FormEvent } from 'react'
+import { useFetchTweets } from '../../hooks/useFetchTweets'
+import CloseIcon from '@mui/icons-material/Close' 
 
 export function SideBar() {
+  const { createTweet } = useFetchTweets()
+  const [tweet, setTweet] = useState('')
+  const [ open, setOpen] = useState(false)
+  
+  async function submitTweet(event: FormEvent){
+    event.preventDefault()
+    createTweet(tweet)
+    setOpen(false)
+  }
+
   return (
     <>
       <Stack
@@ -54,25 +67,69 @@ export function SideBar() {
             <Typography variant='body2'>Perfil</Typography>
           </Box>
 
-          <Box
-          marginTop={2}
-          >
-            <Button 
-            size="small"
-            variant="contained"
-            sx={{ 
-              borderRadius: 10, 
-              px: 6, 
-              textTransform: 'none', 
-              fontSize: 12, 
-              fontWeight: 400 
-            }}
-            
-            >
-            Twettar
-            </Button>
-          </Box>
-          
+            <React.Fragment>
+                <Box
+                marginTop={2}
+                >
+                  <Button 
+                  onClick={() => setOpen((prev) => !prev)}
+                  size="small"
+                  variant="contained"
+                  sx={{ 
+                    borderRadius: 10, 
+                    px: 6, 
+                    textTransform: 'none', 
+                    fontSize: 12, 
+                    fontWeight: 400 
+                  }}
+                  
+                  >
+                  Twettar
+                  </Button>
+                </Box>
+                  <Dialog open={open} onClose={() => setOpen(false)}>
+                    <Box marginBottom={2} marginTop={1}>
+                      <IconButton
+                        sx={{
+                          position: 'absolute',
+                          right: 5
+                        }}
+                        onClick={() => setOpen(false)}
+                        >
+                          <CloseIcon/>
+                      </IconButton>
+                    </Box>
+                    <form onSubmit={submitTweet}>
+                      <DialogContent>
+                          <TextField
+                            multiline
+                            rows={4}
+                            placeholder='O que está acontecendo?'
+                            variant="standard"
+                            value={tweet}
+                            onChange={(e) => setTweet(e.target.value)}
+                          />
+                      </DialogContent>
+                      <DialogActions>
+                        <Button 
+                          type='submit'
+                          onClick={() => setOpen(false)}
+                          size="small"
+                          variant="contained"
+                          sx={{ 
+                            borderRadius: 10, 
+                            px: 3, 
+                            textTransform: 'none', 
+                            fontSize: 12, 
+                            fontWeight: 400 
+                          }}
+                          >
+                          Twettar
+                          </Button>
+                      </DialogActions>
+                    </form>
+                  </Dialog>
+            </React.Fragment>
         </Stack>
       
         <Stack

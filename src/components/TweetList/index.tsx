@@ -47,9 +47,9 @@ export function TweetList(){
               marginLeft={1}
               >
               <Typography variant='body1' sx={{ fontSize: 14}} >
-                {tweet.author.name}
+                {tweet.author?.name}
                 <Typography variant='caption' sx={{ marginLeft: 1, fontWeight: 300}}>
-                  @{tweet.author.username}
+                  @{tweet.author?.username}
                 </Typography>
                 </Typography>
               <Typography variant='caption'>{tweet.content}</Typography>

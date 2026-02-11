@@ -48,5 +48,5 @@ export function TweetProvider({ children }: { children: ReactNode }) {
     <TweetContext.Provider value={{ tweetData, fetchTweets, loading, newTweet, createTweet }}>
       {children}
     </TweetContext.Provider>
-  );
+  )
 }
