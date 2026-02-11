@@ -1,4 +1,5 @@
-import { Box, AppBar, Toolbar, Typography } from "@mui/material"
+import { Box, AppBar, Toolbar, Typography, Stack, Avatar, Divider, Grid } from "@mui/material"
+import { Tweet } from "../Tweet"
 
 export function Feed() {
   return (
@@ -17,6 +18,9 @@ export function Feed() {
             </Toolbar>
           </AppBar>
         </Box>
+
+        <Tweet />
+
     </>
   )
 }
