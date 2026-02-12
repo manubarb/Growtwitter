@@ -45,6 +45,7 @@ export function SideBar() {
           flexDirection= 'row'
           gap={1}
           alignItems='center'
+          sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
           >
             <HomeRoundedIcon style={{ width: 20}}/>
             <Typography variant='body2'>Página Inicial</Typography>
@@ -55,6 +56,7 @@ export function SideBar() {
           flexDirection= 'row'
           gap={1}
           alignItems='center'
+          sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
           >
             <TagRoundedIcon style={{ width: 20}}/>
             <Typography variant='body2'>Explorar</Typography>
@@ -65,9 +67,10 @@ export function SideBar() {
           flexDirection= 'row'
           gap={1}
           alignItems='center'
+          sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
           >
             <PersonRoundedIcon style={{ width: 20}}/>
-            <Typography variant='body2'>Perfil</Typography>
+            <Typography  variant='body2'>Perfil</Typography>
           </Box>
 
             <React.Fragment>
