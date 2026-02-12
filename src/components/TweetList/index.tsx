@@ -7,8 +7,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 
 export function TweetList(){
     const { tweetData, fetchTweets, loading } = useFetchTweets()
-    console.log("Estado atual:", { loading, tweetData });
-    
+
     function getFeed(){
       const storageId = localStorage.getItem('@App:user')
       if (!storageId) {
@@ -19,7 +18,6 @@ export function TweetList(){
       }
       const user = JSON.parse(storageId)
       fetchTweets(user.id)
-      
     }
 
     useEffect(() => {
@@ -41,15 +39,15 @@ export function TweetList(){
             display= 'flex'
             padding={3}
             >
-              <Avatar alt="perfil" src={tweet.author?.imgUrl}/>
+              <Avatar alt="perfil" src={tweet.author.imageUrl}/>
 
               <Stack
               marginLeft={1}
               >
               <Typography variant='body1' sx={{ fontSize: 14}} >
-                {tweet.author?.name}
+                {tweet.author.name}
                 <Typography variant='caption' sx={{ marginLeft: 1, fontWeight: 300}}>
-                  @{tweet.author?.username}
+                  @{tweet.author.username}
                 </Typography>
                 </Typography>
               <Typography variant='caption'>{tweet.content}</Typography>

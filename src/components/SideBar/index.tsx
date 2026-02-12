@@ -28,7 +28,7 @@ export function SideBar() {
       sx={{
         width: '10rem',
         height: '100vh',
-        marginLeft: 20,
+        marginLeft: 10,
         justifyContent: "space-between"
 
       }}
@@ -36,6 +36,7 @@ export function SideBar() {
         <Stack
         marginTop= {2} 
         gap={1}
+        marginLeft={4}
         >
           <Logo style={{ width: 80, marginBottom: 5}} />
 
@@ -141,12 +142,12 @@ export function SideBar() {
           display= 'flex'
           flexDirection= 'row'
           >
-            <Avatar alt="perfil" src={user?.imgUrl}/>
+            <Avatar alt="perfil" src={user?.imageUrl}/>
             
             <Stack
             marginLeft={1}
             >
-            <Typography variant='body2'>{user?.name}</Typography>
+            <Typography noWrap variant='body2'>{user?.name}</Typography>
             <Typography variant='caption'>@{user?.username}</Typography>
             </Stack>
            

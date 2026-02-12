@@ -5,7 +5,7 @@ import type { User } from './AuthContext'
 export interface Tweet {
   id?: string
   content: string
-  author?: User
+  author: User
 }
 
 interface TweetContextData {

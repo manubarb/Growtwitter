@@ -5,12 +5,12 @@ export interface User {
   id: string
   name: string
   username: string
-  imgUrl: string
+  imageUrl: string
 }
 
 interface AuthData {
   signed: boolean
-  user: User | null
+  user: User 
   isLoading: boolean
   signIn: (username: string, password: string) => Promise<boolean>
   isSigningIn: boolean
@@ -19,7 +19,7 @@ interface AuthData {
 export const AuthContext = createContext<AuthData>({} as AuthData)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User>({} as User)
   const [isLoading, setIsLoading] = useState(true)
   const [isSigningIn, setIsSigningIn] = useState(false)
 
