@@ -8,12 +8,14 @@ import Avatar from '@mui/material/Avatar'
 import React, { useState, type FormEvent } from 'react'
 import { useFetchTweets } from '../../hooks/useFetchTweets'
 import CloseIcon from '@mui/icons-material/Close' 
+import { useAuth } from '../../hooks/useAuth'
 
 export function SideBar() {
-  const { createTweet } = useFetchTweets()
+  const { createTweet} = useFetchTweets()
   const [tweet, setTweet] = useState('')
   const [ open, setOpen] = useState(false)
-  
+  const { user } = useAuth()
+
   async function submitTweet(event: FormEvent){
     event.preventDefault()
     createTweet(tweet)
@@ -139,16 +141,17 @@ export function SideBar() {
           display= 'flex'
           flexDirection= 'row'
           >
-            <Avatar alt="perfil " src="">U</Avatar>
-
+            <Avatar alt="perfil" src={user?.imgUrl}/>
+            
             <Stack
             marginLeft={1}
             >
-            <Typography variant='body2'>User</Typography>
-            <Typography variant='caption'>@username</Typography>
+            <Typography variant='body2'>{user?.name}</Typography>
+            <Typography variant='caption'>@{user?.username}</Typography>
             </Stack>
-
+           
           </Box>
+         
           
           <Button 
           style={{ marginBottom: 15, width: 15}} 

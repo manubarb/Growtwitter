@@ -41,7 +41,7 @@ export function TweetList(){
             display= 'flex'
             padding={3}
             >
-              <Avatar alt="perfil" src="">U</Avatar>
+              <Avatar alt="perfil" src={tweet.author?.imgUrl}/>
 
               <Stack
               marginLeft={1}
