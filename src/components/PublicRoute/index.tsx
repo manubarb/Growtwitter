@@ -5,5 +5,5 @@ export function PublicRoute() {
   const { signed, isLoading } = useAuth() 
   if (isLoading) return null // adicionar elemento visual de carregamento
 
-  return signed ? <Navigate to="/home" replace /> : <Outlet />
+  return signed ? <Navigate to="/" replace /> : <Outlet />
 }

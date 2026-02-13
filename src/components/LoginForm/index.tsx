@@ -15,7 +15,7 @@ export function LoginForm() {
 
     const success = await signIn(username, password)
     if (success) {
-      navigate('/home', { replace: true })
+      navigate('/', { replace: true })
       console.log('logado')
     } else {
       console.log('erro ao logar')

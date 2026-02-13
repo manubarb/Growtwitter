@@ -48,7 +48,7 @@ export function SideBar() {
           gap={1}
           alignItems='center'
           sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
-          onClick={() => navigate('/home')}
+          onClick={() => navigate('/')}
           >
             <HomeRoundedIcon style={{ width: 20}}/>
             <Typography variant='body2'>Página Inicial</Typography>
@@ -60,7 +60,7 @@ export function SideBar() {
           gap={1}
           alignItems='center'
           sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
-          onClick={() => navigate('/home/explore')}
+          onClick={() => navigate('/explore')}
           >
             <TagRoundedIcon style={{ width: 20}}/>
             <Typography variant='body2'>Explorar</Typography>
@@ -72,7 +72,7 @@ export function SideBar() {
           gap={1}
           alignItems='center'
           sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
-          onClick={() => navigate('/home/profile')}
+          onClick={() => navigate('/profile')}
           >
             <PersonRoundedIcon style={{ width: 20}}/>
             <Typography  variant='body2'>Perfil</Typography>
