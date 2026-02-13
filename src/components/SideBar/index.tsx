@@ -9,12 +9,14 @@ import React, { useState, type FormEvent } from 'react'
 import { useFetchTweets } from '../../hooks/useFetchTweets'
 import CloseIcon from '@mui/icons-material/Close' 
 import { useAuth } from '../../hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 export function SideBar() {
   const { createTweet} = useFetchTweets()
   const [tweet, setTweet] = useState('')
   const [ open, setOpen] = useState(false)
   const { user } = useAuth()
+  const navigate = useNavigate()
 
   async function submitTweet(event: FormEvent){
     event.preventDefault()
@@ -46,6 +48,7 @@ export function SideBar() {
           gap={1}
           alignItems='center'
           sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
+          onClick={() => navigate('/home')}
           >
             <HomeRoundedIcon style={{ width: 20}}/>
             <Typography variant='body2'>Página Inicial</Typography>
@@ -57,6 +60,7 @@ export function SideBar() {
           gap={1}
           alignItems='center'
           sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
+          onClick={() => navigate('/home/explore')}
           >
             <TagRoundedIcon style={{ width: 20}}/>
             <Typography variant='body2'>Explorar</Typography>
@@ -68,6 +72,7 @@ export function SideBar() {
           gap={1}
           alignItems='center'
           sx={{ cursor: 'pointer', transition: 'transform 100ms ease-in-out', '&:hover': { transform: 'scale(1.1)'} }}
+          onClick={() => navigate('/home/profile')}
           >
             <PersonRoundedIcon style={{ width: 20}}/>
             <Typography  variant='body2'>Perfil</Typography>

@@ -4,6 +4,8 @@ import { useEffect } from "react"
 import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import { AppBar, Toolbar } from "@mui/material"
+
 
 export function TweetList(){
     const { tweetData, fetchTweets, loading } = useFetchTweets()
@@ -25,7 +27,21 @@ export function TweetList(){
     }, [])
 
     return (
-        <>        
+        <> 
+                <Box>
+          <AppBar position="sticky" variant='outlined' sx={{ backgroundColor: 'transparent'}}>
+            <Toolbar>
+              <Typography 
+              variant="body1" 
+              component="div"
+              color='textPrimary'
+              fontWeight={500}
+              >
+                Página Inicial
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </Box>       
         {loading && <Box padding={2}>Carregando tweets...</Box>}
         { !loading && tweetData?.length === 0 && (
           <Box padding={2}>Não há tweets para exibir.</Box>
