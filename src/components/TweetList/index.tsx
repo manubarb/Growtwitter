@@ -6,7 +6,6 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { AppBar, Toolbar } from "@mui/material"
 
-
 export function TweetList(){
     const { tweetData, fetchTweets, loading } = useFetchTweets()
 
