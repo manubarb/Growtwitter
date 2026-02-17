@@ -5,6 +5,7 @@ import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlin
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { AppBar, Toolbar } from "@mui/material"
+import CircularProgress from '@mui/material/CircularProgress'
 
 export function TweetList(){
     const { tweetData, fetchTweets, loading } = useFetchTweets()
@@ -41,7 +42,14 @@ export function TweetList(){
             </Toolbar>
           </AppBar>
         </Box>       
-        {loading && <Box padding={2}>Carregando tweets...</Box>}
+        {loading &&
+        <Box 
+        marginTop={2}
+        display='flex'
+        justifyContent='center'
+        >
+          <CircularProgress color="primary" size={40} thickness={4} />
+        </Box>}
         { !loading && tweetData?.length === 0 && (
           <Box padding={2}>Não há tweets para exibir.</Box>
         )}

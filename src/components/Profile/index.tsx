@@ -1,4 +1,4 @@
-import { Box, AppBar, Toolbar, Typography, Avatar, Stack, Divider, Grid } from "@mui/material"
+import { Box, AppBar, Toolbar, Typography, Avatar, Stack, Divider, Grid, CircularProgress } from "@mui/material"
 import { useAuth } from "../../hooks/useAuth"
 import { useFetchTweets } from "../../hooks/useFetchTweets"
 import { useEffect } from "react"
@@ -93,7 +93,14 @@ export function Profile(){
         }}
         />
         
-        {loading && <Box padding={2}>Carregando tweets...</Box>}
+        {loading &&
+        <Box 
+        display='flex'
+        justifyContent='center'
+        marginTop={2}
+        >
+          <CircularProgress color="primary" size={40} thickness={4} />
+        </Box>}
         { !loading && tweetData?.length === 0 && (
           <Box padding={2}>Não há tweets para exibir.</Box>
         )}
