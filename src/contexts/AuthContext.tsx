@@ -1,11 +1,13 @@
 import { createContext, useState, useEffect, type ReactNode } from 'react'
 import { api, authAPI } from '../services/api'
+import type { Tweet } from './TweetContext'
 
 export interface User {
   id: string
   name: string
   username: string
   imageUrl: string
+  tweets: Tweet[]
 }
 
 interface AuthData {
@@ -14,6 +16,7 @@ interface AuthData {
   isLoading: boolean
   signIn: (username: string, password: string) => Promise<boolean>
   isSigningIn: boolean
+  loadUserData: (id: string) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthData>({} as AuthData)
@@ -61,10 +64,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
     setIsSigningIn(false)
   }
+}
+
+  async function loadUserData(userId: string){
+    try {
+      const response = await authAPI.loadUserData(userId)
+      setUser(response.data.data)
+    } catch (e) {
+      console.log(e)
+    }
   }
+  
 
   return (
-    <AuthContext.Provider value={{ signed: !!user.id, user, isLoading, signIn, isSigningIn }}>
+    <AuthContext.Provider value={{ signed: !!user.id, user, isLoading, signIn, isSigningIn, loadUserData }}>
       {children}
     </AuthContext.Provider>
   )

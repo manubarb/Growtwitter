@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { Tweet } from '../contexts/TweetContext'
+import type { User } from '../contexts/AuthContext'
 
 const baseURL = import.meta.env.VITE_API_BASE_URL
 
@@ -32,7 +33,8 @@ export const authAPI = {
   login: (username: string, password: string) =>
     api.post('/auth/login', { username, password }),
   getTweets: (userId: string) => api.get<{data : Tweet[]}>(`/users/${userId}/tweets`),
-  createTweet: (content: string) => api.post('/tweets', { content })
+  createTweet: (content: string) => api.post('/tweets', { content }),
+  loadUserData: (userId: string) => api.get<{data: User}>(`/users/${userId}`)
 }
 
 export function logout() {

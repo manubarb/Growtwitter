@@ -7,7 +7,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
 export function Profile(){
-    const { user } = useAuth()
+    const { loadUserData, user } = useAuth()
     const { tweetData, fetchTweets, loading } = useFetchTweets()
 
     function getFeed(){
@@ -22,8 +22,22 @@ export function Profile(){
       fetchTweets(user.id)
     }
 
+    function getUserData(){
+      const storedUser = localStorage.getItem('@App:user')
+      if(storedUser){
+        const userObj = JSON.parse(storedUser)
+        loadUserData(userObj.id)
+      }else if(!storedUser){
+        localStorage.removeItem('@App:token')
+        localStorage.removeItem('@App:user')
+        window.location.href = '/login'
+        return
+      }
+    }
+
     useEffect(() => {
       getFeed()
+      getUserData()
     }, [])
   
     return(
@@ -55,7 +69,7 @@ export function Profile(){
         left={560}
         >
           <Avatar
-          src={user?.imageUrl}
+          src={user.imageUrl}
           sx={{ width: 100, height: 100 }}
           />
         </Box>
@@ -66,8 +80,8 @@ export function Profile(){
             <Stack
             marginLeft={1}
             >
-              <Typography noWrap variant='body2'>{user?.name}</Typography>
-              <Typography variant='caption'>@{user?.username}</Typography>
+              <Typography noWrap variant='body2'>{user.name}</Typography>
+              <Typography variant='caption'>@{user.username}</Typography>
             </Stack>
         </Box>
 
