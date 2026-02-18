@@ -70,12 +70,12 @@ export function Profile(){
         >
           <Avatar
           src={user.imageUrl}
-          sx={{ width: 100, height: 100 }}
+          sx={{ width: 100, height: 100, bgcolor: 'white' }}
           />
         </Box>
 
         <Box
-        marginTop={6}
+        marginTop={7}
         >
             <Stack
             marginLeft={1}
@@ -113,7 +113,7 @@ export function Profile(){
             display= 'flex'
             padding={3}
             >
-              <Avatar alt="perfil" src={tweet.author.imageUrl}/>
+              <Avatar alt="perfil" src={tweet.author.imageUrl} sx={{ bgcolor: 'white' }}/>
 
               <Stack
               marginLeft={1}

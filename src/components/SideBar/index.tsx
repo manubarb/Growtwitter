@@ -150,13 +150,13 @@ export function SideBar() {
           display= 'flex'
           flexDirection= 'row'
           >
-            <Avatar alt="perfil" src={user?.imageUrl}/>
+            <Avatar alt="perfil" src={user.imageUrl} sx={{ bgcolor: 'white' }}/>
             
             <Stack
             marginLeft={1}
             >
-            <Typography noWrap variant='body2'>{user?.name}</Typography>
-            <Typography variant='caption'>@{user?.username}</Typography>
+            <Typography noWrap variant='body2'>{user.name}</Typography>
+            <Typography variant='caption'>@{user.username}</Typography>
             </Stack>
            
           </Box>

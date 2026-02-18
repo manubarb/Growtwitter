@@ -62,7 +62,7 @@ export function TweetList(){
             display= 'flex'
             padding={3}
             >
-              <Avatar alt="perfil" src={tweet.author.imageUrl}/>
+              <Avatar alt="perfil" src={tweet.author.imageUrl} sx={{ bgcolor: 'white' }}/>
 
               <Stack
               marginLeft={1}
