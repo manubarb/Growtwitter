@@ -10,6 +10,9 @@ import { useFetchTweets } from '../../hooks/useFetchTweets'
 import CloseIcon from '@mui/icons-material/Close' 
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
+import Brightness4Icon from '@mui/icons-material/Brightness4'
+import { useAppDispatch } from '../../store/hooks'
+import { toggleTheme } from '../../store/slices/themesSlice'
 
 export function SideBar() {
   const { createTweet} = useFetchTweets()
@@ -17,12 +20,17 @@ export function SideBar() {
   const [ open, setOpen] = useState(false)
   const { user } = useAuth()
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   async function submitTweet(event: FormEvent){
     event.preventDefault()
     createTweet(tweet)
     setOpen(false)
   }
+
+	function handleToggleTheme(){
+		dispatch(toggleTheme())
+	}
 
   return (
     <>
@@ -160,18 +168,25 @@ export function SideBar() {
             </Stack>
            
           </Box>
-         
           
-          <Button 
-          style={{ marginBottom: 15, width: 15}} 
-          onClick={logout}
-          variant='outlined'
-          >
-            sair
-          </Button>
-        </Stack>
+          <Box>
+            <Button 
+            style={{ marginBottom: 15, width: 15, marginRight: 50}} 
+            onClick={logout}
+            variant='outlined'
+            >
+              sair
+            </Button>
 
+            <IconButton color='inherit' onClick={handleToggleTheme}>
+				      <Brightness4Icon  />
+				    </IconButton>
+          </Box>
+          
+        </Stack>
+        
       </Stack>
+      
     </>
   )
 }
