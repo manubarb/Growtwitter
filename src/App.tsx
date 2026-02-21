@@ -21,7 +21,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <>
-      <ThemeProvider theme={theme} defaultMode="dark">
+      <ThemeProvider theme={theme}>
         <ThemeWrapper>
           <AuthProvider>
             <TweetProvider>

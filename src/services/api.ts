@@ -34,7 +34,8 @@ export const authAPI = {
     api.post('/auth/login', { username, password }),
   getTweets: (userId: string) => api.get<{data : Tweet[]}>(`/users/${userId}/tweets`),
   createTweet: (content: string) => api.post('/tweets', { content }),
-  loadUserData: (userId: string) => api.get<{data: User}>(`/users/${userId}`)
+  loadUserData: (userId: string) => api.get<{data: User}>(`/users/${userId}`),
+  deleteTweet: (id: string) => api.delete(`/tweets/${id}`)
 }
 
 export function logout() {

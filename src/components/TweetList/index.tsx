@@ -1,4 +1,4 @@
-import { Box, Avatar, Stack, Typography, Grid, Divider } from "@mui/material"
+import { Box, Avatar, Stack, Typography, Grid, Divider, IconButton } from "@mui/material"
 import { useFetchTweets } from "../../hooks/useFetchTweets"
 import { useEffect } from "react"
 import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlineOutlined'
@@ -6,9 +6,15 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { AppBar, Toolbar } from "@mui/material"
 import CircularProgress from '@mui/material/CircularProgress'
+import { deleteTweet } from "../../store/slices/tweetSlice"
+import type { AppDispatch} from "../../store"
+import { useDispatch } from "react-redux"
+import { useAppSelector } from "../../store/hooks"
 
 export function TweetList(){
     const { tweetData, fetchTweets, loading } = useFetchTweets()
+    const { isDeleted } = useAppSelector((state) => state.tweets)    
+    const dispatch = useDispatch<AppDispatch>()
 
     function getFeed(){
       const storageId = localStorage.getItem('@App:user')
@@ -25,6 +31,10 @@ export function TweetList(){
     useEffect(() => {
       getFeed()
     }, [])
+
+    function handleRemoveTweet(id: string){
+      dispatch(deleteTweet(id))
+    }
 
     return (
         <> 
@@ -85,7 +95,18 @@ export function TweetList(){
 
                 <Grid ><ChatBubbleOutlineOutlinedIcon fontSize="inherit"/></Grid>
                 <Grid ><FavoriteBorderOutlinedIcon fontSize="inherit"/></Grid>
-                <Grid ><DeleteOutlineOutlinedIcon fontSize="inherit"/></Grid>
+                <Grid >
+                  <IconButton 
+                    onClick={() => handleRemoveTweet(tweet.id)}
+                    disabled={isDeleted.includes(tweet.id)} 
+                  >
+                    {isDeleted.includes(tweet.id) ? (
+                      <CircularProgress size={10} /> 
+                    ) : (
+                      <DeleteOutlineOutlinedIcon sx={{ width: 15, height: 15}}/>
+                    )}
+                  </IconButton>
+                </Grid>
 
               </Grid>
               </Stack>
