@@ -7,19 +7,18 @@ import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
 import Avatar from '@mui/material/Avatar'
 import React, { useState, type FormEvent } from 'react'
 import CloseIcon from '@mui/icons-material/Close' 
-import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
-import { useAppDispatch } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { toggleTheme } from '../../store/slices/themesSlice'
 import { createTweet } from '../../store/slices/tweetSlice'
 
 export function SideBar() {
   const [tweet, setTweet] = useState('')
   const [ open, setOpen] = useState(false)
-  const { user } = useAuth()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.tweets.user)
 
   async function submitTweet(event: FormEvent){
     event.preventDefault()
@@ -162,13 +161,13 @@ export function SideBar() {
           display= 'flex'
           flexDirection= 'row'
           >
-            <Avatar alt="perfil" src={user.imageUrl} sx={{ bgcolor: 'white' }}/>
+            <Avatar alt="perfil" src={user?.imageUrl} sx={{ bgcolor: 'white' }}/>
             
             <Stack
             marginLeft={1}
             >
-            <Typography noWrap variant='body2'>{user.name}</Typography>
-            <Typography variant='caption'>@{user.username}</Typography>
+            <Typography noWrap variant='body2'>{user?.name}</Typography>
+            <Typography variant='caption'>@{user?.username}</Typography>
             </Stack>
            
           </Box>

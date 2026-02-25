@@ -1,14 +1,16 @@
 import { Box, AppBar, Toolbar, Typography, Avatar, Stack, Divider, Grid, CircularProgress } from "@mui/material"
-import { useAuth } from "../../hooks/useAuth"
 import { useFetchTweets } from "../../hooks/useFetchTweets"
 import { useEffect } from "react"
 import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import { loadUserData } from '../../store/slices/tweetSlice'
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
 
 export function Profile(){
-    const { loadUserData, user } = useAuth()
     const { tweetData, fetchTweets, loading } = useFetchTweets()
+    const dispatch = useAppDispatch()
+    const user = useAppSelector((state) => state.tweets.user)
 
     function getFeed(){
       const storageId = localStorage.getItem('@App:user')
@@ -26,7 +28,7 @@ export function Profile(){
       const storedUser = localStorage.getItem('@App:user')
       if(storedUser){
         const userObj = JSON.parse(storedUser)
-        loadUserData(userObj.id)
+        dispatch(loadUserData(userObj.id))
       }else if(!storedUser){
         localStorage.removeItem('@App:token')
         localStorage.removeItem('@App:user')
@@ -69,7 +71,7 @@ export function Profile(){
         left={560}
         >
           <Avatar
-          src={user.imageUrl}
+          src={user?.imageUrl}
           sx={{ width: 100, height: 100, bgcolor: 'white' }}
           />
         </Box>
@@ -80,8 +82,8 @@ export function Profile(){
             <Stack
             marginLeft={1}
             >
-              <Typography noWrap variant='body2'>{user.name}</Typography>
-              <Typography variant='caption'>@{user.username}</Typography>
+              <Typography noWrap variant='body2'>{user?.name}</Typography>
+              <Typography variant='caption'>@{user?.username}</Typography>
             </Stack>
         </Box>
 

@@ -1,19 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { Tweet } from '../../contexts/TweetContext'
 import { authAPI } from '../../services/api'
+import type { User } from '../../contexts/AuthContext'
 
 interface TweetState {
   list: Tweet[]
   loading: boolean
   error: string | null
   isDeleted: string[]
+  user: User | null
 }
 
 const initialState: TweetState = {
   list: [],
   loading: false,
   error: null,
-  isDeleted: []
+  isDeleted: [],
+  user: null
 }
 
 export const createTweet = createAsyncThunk(
@@ -25,11 +28,19 @@ export const createTweet = createAsyncThunk(
 )
 
 export const deleteTweet = createAsyncThunk(
-  'tweets/delete',
-  async (id: string) => {
-    await authAPI.deleteTweet(id)
-    return id
-  }
+    'tweets/delete',
+     async (id: string) => {
+         await authAPI.deleteTweet(id)
+         return id
+     }
+)
+
+export const loadUserData = createAsyncThunk(
+    'user/data',
+    async (id: string) => {
+        const response = await authAPI.loadUserData(id)
+        return response.data.data
+    }
 )
 
 const tweetSlice = createSlice({
@@ -62,6 +73,16 @@ const tweetSlice = createSlice({
         .addCase(deleteTweet.rejected, (state, action) => {
             state.loading = false
             state.isDeleted = state.isDeleted.filter(id => id !== action.meta.arg)
+        })
+        .addCase(loadUserData.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(loadUserData.fulfilled, (state, action) => {
+            state.loading = false
+            state.user = action.payload
+        })
+        .addCase(loadUserData.rejected, (state) => {
+            state.loading = false
         })
     }
 })

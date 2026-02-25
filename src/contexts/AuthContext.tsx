@@ -16,7 +16,6 @@ interface AuthData {
   isLoading: boolean
   signIn: (username: string, password: string) => Promise<boolean>
   isSigningIn: boolean
-  loadUserData: (id: string) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthData>({} as AuthData)
@@ -66,18 +65,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 }
 
-  async function loadUserData(userId: string){
-    try {
-      const response = await authAPI.loadUserData(userId)
-      setUser(response.data.data)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-  
-
   return (
-    <AuthContext.Provider value={{ signed: !!user.id, user, isLoading, signIn, isSigningIn, loadUserData }}>
+    <AuthContext.Provider value={{ signed: !!user.id, user, isLoading, signIn, isSigningIn }}>
       {children}
     </AuthContext.Provider>
   )
