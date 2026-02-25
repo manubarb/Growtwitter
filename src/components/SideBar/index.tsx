@@ -6,16 +6,15 @@ import TagRoundedIcon from '@mui/icons-material/TagRounded'
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
 import Avatar from '@mui/material/Avatar'
 import React, { useState, type FormEvent } from 'react'
-import { useFetchTweets } from '../../hooks/useFetchTweets'
 import CloseIcon from '@mui/icons-material/Close' 
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import { useAppDispatch } from '../../store/hooks'
 import { toggleTheme } from '../../store/slices/themesSlice'
+import { createTweet } from '../../store/slices/tweetSlice'
 
 export function SideBar() {
-  const { createTweet} = useFetchTweets()
   const [tweet, setTweet] = useState('')
   const [ open, setOpen] = useState(false)
   const { user } = useAuth()
@@ -24,8 +23,13 @@ export function SideBar() {
 
   async function submitTweet(event: FormEvent){
     event.preventDefault()
-    createTweet(tweet)
-    setOpen(false)
+    try {
+      await dispatch(createTweet(tweet)).unwrap()
+      setTweet('')
+      setOpen(false)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
 	function handleToggleTheme(){

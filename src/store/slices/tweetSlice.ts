@@ -16,6 +16,14 @@ const initialState: TweetState = {
   isDeleted: []
 }
 
+export const createTweet = createAsyncThunk(
+    'tweets/create',
+    async (content: string) => { 
+        const response = await authAPI.createTweet(content)
+        return response.data 
+    }
+)
+
 export const deleteTweet = createAsyncThunk(
   'tweets/delete',
   async (id: string) => {
@@ -30,14 +38,29 @@ const tweetSlice = createSlice({
 	reducers: {},
     extraReducers: (builder) => {
         builder
+        .addCase(createTweet.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(createTweet.fulfilled, (state, action) => {
+            state.loading = false
+            if(action.payload){
+                state.list.push(action.payload)
+            }
+        })
+        .addCase(createTweet.rejected, (state) => {
+            state.loading = false
+        })
         .addCase(deleteTweet.pending, (state, action) => {
+            state.loading = true
             state.isDeleted.push(action.meta.arg)
         })
         .addCase(deleteTweet.fulfilled, (state, action) => {
+            state.loading = false
             state.isDeleted = state.isDeleted.filter(id => id !== action.payload)
             state.list = state.list.filter(item => item.id !== action.payload)
         })
         .addCase(deleteTweet.rejected, (state, action) => {
+            state.loading = false
             state.isDeleted = state.isDeleted.filter(id => id !== action.meta.arg)
         })
     }

@@ -7,14 +7,12 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import { AppBar, Toolbar } from "@mui/material"
 import CircularProgress from '@mui/material/CircularProgress'
 import { deleteTweet } from "../../store/slices/tweetSlice"
-import type { AppDispatch} from "../../store"
-import { useDispatch } from "react-redux"
-import { useAppSelector } from "../../store/hooks"
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
 
 export function TweetList(){
     const { tweetData, fetchTweets, loading } = useFetchTweets()
     const { isDeleted } = useAppSelector((state) => state.tweets)    
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useAppDispatch()
 
     function getFeed(){
       const storageId = localStorage.getItem('@App:user')
