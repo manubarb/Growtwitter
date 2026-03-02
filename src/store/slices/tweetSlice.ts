@@ -36,7 +36,7 @@ export const createTweet = createAsyncThunk(
     'tweets/create',
     async (content: string) => { 
         const response = await authAPI.createTweet(content)
-        return response.data 
+        return response.data.data
     }
 )
 
@@ -77,9 +77,13 @@ const tweetSlice = createSlice({
         })
         .addCase(createTweet.fulfilled, (state, action) => {
             state.loading = false
-            if(action.payload){
-                state.list.push(action.payload)
-            }
+            if (action.payload) {
+                    const newTweet = {
+                        ...action.payload,
+                        author: action.payload.author || state.user 
+                    }
+                    state.list.unshift(newTweet)
+                }
         })
         .addCase(createTweet.rejected, (state) => {
             state.loading = false
