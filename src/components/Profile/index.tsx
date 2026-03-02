@@ -1,46 +1,24 @@
 import { Box, AppBar, Toolbar, Typography, Avatar, Stack, Divider, Grid, CircularProgress } from "@mui/material"
-import { useFetchTweets } from "../../hooks/useFetchTweets"
 import { useEffect } from "react"
 import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { loadUserData } from '../../store/slices/tweetSlice'
+import { fetchTweets, loadUserData } from '../../store/slices/tweetSlice'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
+import { useAuth } from "../../hooks/useAuth"
 
 export function Profile(){
-    const { tweetData, fetchTweets, loading } = useFetchTweets()
     const dispatch = useAppDispatch()
-    const user = useAppSelector((state) => state.tweets.user)
-
-    function getFeed(){
-      const storageId = localStorage.getItem('@App:user')
-      if (!storageId) {
-        localStorage.removeItem('@App:token')
-        localStorage.removeItem('@App:user')
-        window.location.href = '/login'
-        return
-      }
-      const user = JSON.parse(storageId)
-      fetchTweets(user.id)
-    }
-
-    function getUserData(){
-      const storedUser = localStorage.getItem('@App:user')
-      if(storedUser){
-        const userObj = JSON.parse(storedUser)
-        dispatch(loadUserData(userObj.id))
-      }else if(!storedUser){
-        localStorage.removeItem('@App:token')
-        localStorage.removeItem('@App:user')
-        window.location.href = '/login'
-        return
-      }
-    }
+    const { list, loading, user: userAuth } = useAppSelector((state) => state.tweets)
+    const { user } = useAuth()
 
     useEffect(() => {
-      getFeed()
-      getUserData()
-    }, [])
+      if(user?.id){
+      dispatch(fetchTweets(user.id))
+      dispatch(loadUserData(user.id))
+      }
+
+    }, [dispatch])
   
     return(
         <>
@@ -71,7 +49,7 @@ export function Profile(){
         left={560}
         >
           <Avatar
-          src={user?.imageUrl}
+          src={userAuth?.imageUrl}
           sx={{ width: 100, height: 100, bgcolor: 'white' }}
           />
         </Box>
@@ -103,27 +81,27 @@ export function Profile(){
         >
           <CircularProgress color="primary" size={40} thickness={4} />
         </Box>}
-        { !loading && tweetData?.length === 0 && (
+        { !loading && list?.length === 0 && (
           <Box padding={2}>Não há tweets para exibir.</Box>
         )}
 
-       { tweetData?.map((tweet) => (
+       { list?.map((tweet) => (
         <Box
+        key={tweet.id}
         >
             <Box
-            key={tweet.id}
             display= 'flex'
             padding={3}
             >
-              <Avatar alt="perfil" src={tweet.author.imageUrl} sx={{ bgcolor: 'white' }}/>
+              <Avatar alt="perfil" src={tweet.author?.imageUrl} sx={{ bgcolor: 'white' }}/>
 
               <Stack
               marginLeft={1}
               >
               <Typography variant='body1' sx={{ fontSize: 14}} >
-                {tweet.author.name}
+                {tweet.author?.name}
                 <Typography variant='caption' sx={{ marginLeft: 1, fontWeight: 300}}>
-                  @{tweet.author.username}
+                  @{tweet.author?.username}
                 </Typography>
                 </Typography>
               <Typography variant='caption'>{tweet.content}</Typography>

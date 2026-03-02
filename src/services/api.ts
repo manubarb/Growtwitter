@@ -1,6 +1,6 @@
 import axios from 'axios'
-import type { Tweet } from '../contexts/TweetContext'
 import type { User } from '../contexts/AuthContext'
+import type { Tweet } from '../store/slices/tweetSlice'
 
 const baseURL = import.meta.env.VITE_API_BASE_URL
 
@@ -42,4 +42,5 @@ export function logout() {
   localStorage.removeItem('@App:token')
   localStorage.removeItem('@App:user')
   window.location.href = '/login'
+
 }

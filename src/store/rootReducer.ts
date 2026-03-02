@@ -5,13 +5,16 @@ import themesReducer from './slices/themesSlice'
 import tweetReducer from './slices/tweetSlice' 
 
 const rootReducer = combineReducers({
-	themes: themesReducer,
+    themes: themesReducer,
     tweets: tweetReducer,
 })
 
-export const persistedReducer = persistReducer({
-	key: 'themes',
-	storage
-}, rootReducer)
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['themes'] 
+}
 
-export default rootReducer
+export const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export default persistedReducer

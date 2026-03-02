@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, type ReactNode } from 'react'
 import { api, authAPI } from '../services/api'
-import type { Tweet } from './TweetContext'
+import type { Tweet } from '../store/slices/tweetSlice'
 
 export interface User {
   id: string

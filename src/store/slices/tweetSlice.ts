@@ -1,7 +1,12 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import type { Tweet } from '../../contexts/TweetContext'
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { authAPI } from '../../services/api'
 import type { User } from '../../contexts/AuthContext'
+
+export interface Tweet {
+  id: string
+  content: string
+  author: User
+}
 
 interface TweetState {
   list: Tweet[]
@@ -18,6 +23,14 @@ const initialState: TweetState = {
   isDeleted: [],
   user: null
 }
+
+export const fetchTweets = createAsyncThunk(
+    'tweets/fetchTweets',
+    async (userId: string) => {
+        const response = await authAPI.getTweets(userId)
+        return response.data.data
+    }
+)
 
 export const createTweet = createAsyncThunk(
     'tweets/create',
@@ -49,6 +62,16 @@ const tweetSlice = createSlice({
 	reducers: {},
     extraReducers: (builder) => {
         builder
+        .addCase(fetchTweets.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(fetchTweets.fulfilled, (state, action: PayloadAction<Tweet[]>) => {
+            state.loading = false
+            state.list = action.payload
+        } )
+        .addCase(fetchTweets.rejected, (state) => {
+            state.loading = false
+        })
         .addCase(createTweet.pending, (state) => {
             state.loading = true
         })
