@@ -1,13 +1,15 @@
 import { Box, Avatar, Stack, Typography, Grid, Divider, IconButton } from "@mui/material"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { AppBar, Toolbar } from "@mui/material"
 import CircularProgress from '@mui/material/CircularProgress'
 import { deleteTweet, fetchTweets, loadUserData } from "../../store/slices/tweetSlice"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { useAuth } from "../../hooks/useAuth"
+import { toggleLike } from "../../store/slices/tweetSlice"
 
 export function TweetList(){
     const { isDeleted, list, loading } = useAppSelector((state) => state.tweets)    
@@ -24,6 +26,12 @@ export function TweetList(){
 
     function handleRemoveTweet(id: string){
       dispatch(deleteTweet(id))
+    }
+
+    function handleLike(tweetId: string){
+      if(user?.id){
+        dispatch(toggleLike({tweetId, userId: user.id}))
+      }
     }
 
     return (
@@ -84,7 +92,16 @@ export function TweetList(){
               >
 
                 <Grid ><ChatBubbleOutlineOutlinedIcon fontSize="inherit"/></Grid>
-                <Grid ><FavoriteBorderOutlinedIcon fontSize="inherit"/></Grid>
+                <Grid >
+                  <IconButton
+                  onClick={() => handleLike(tweet.id)}
+                  >
+                    {tweet.likes?.some(l => l.userId === user?.id) ? 
+                    (<FavoriteOutlinedIcon sx={{ width: 15, height: 15, color: 'red'}} />
+                    ) : (<FavoriteBorderOutlinedIcon sx={{ width: 15, height: 15}} />)}
+                    
+                  </IconButton>
+                  </Grid>
                 <Grid >
                   <IconButton 
                     onClick={() => handleRemoveTweet(tweet.id)}

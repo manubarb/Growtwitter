@@ -6,6 +6,12 @@ export interface Tweet {
   id: string
   content: string
   author: User
+  likes: Like[]
+}
+
+export interface Like {
+  userId: string
+  tweetId: string
 }
 
 interface TweetState {
@@ -59,7 +65,22 @@ export const loadUserData = createAsyncThunk(
 const tweetSlice = createSlice({
 	name: 'tweets', 
 	initialState,
-	reducers: {},
+	reducers: {
+        toggleLike: (state, action: PayloadAction<{ tweetId: string, userId: string }>) => {
+            const tweet = state.list.find(t => t.id === action.payload.tweetId)
+            if (tweet) {
+                const liked = tweet.likes.some(like => like.userId === action.payload.userId)
+                if (liked) {
+                tweet.likes = tweet.likes.filter(like => like.userId !== action.payload.userId)
+                } else {
+                tweet.likes.push({ 
+                    userId: action.payload.userId, 
+                    tweetId: action.payload.tweetId 
+                })
+            }
+        }
+    }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(fetchTweets.pending, (state) => {
@@ -115,3 +136,4 @@ const tweetSlice = createSlice({
 })
 
 export default tweetSlice.reducer
+export const { toggleLike } = tweetSlice.actions
