@@ -1,9 +1,7 @@
-// deve conter o feed de tweets do usuário logado
 import { CssBaseline, Divider, Grid } from '@mui/material'
 import { Explore } from '../../components/Explore'
 import { Feed } from '../../components/Feed'
 import { SideBar } from '../../components/SideBar'
-//import { Container } from './styles'
 
 export function Home() {
   return (
@@ -13,6 +11,7 @@ export function Home() {
       container
       columns={{ sm: 4, md: 6, lg: 12 }}
       flexDirection='row'
+      wrap="nowrap"
       sx={{
         justifyContent: 'center',
         alignItems: 'flex-start'
@@ -20,6 +19,7 @@ export function Home() {
       >
         <Grid
         size={2}
+        paddingRight={30}
         >
           <SideBar />
         </Grid>

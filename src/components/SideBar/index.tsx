@@ -43,7 +43,7 @@ export function SideBar() {
       sx={{
         width: '10rem',
         height: '100vh',
-        marginLeft: 10,
+        marginLeft: 1,
         justifyContent: "space-between"
 
       }}
@@ -111,7 +111,11 @@ export function SideBar() {
                   Twettar
                   </Button>
                 </Box>
-                  <Dialog open={open} onClose={() => setOpen(false)}>
+                  <Dialog 
+                  open={open} 
+                  onClose={() => setOpen(false)}
+                  sx={{ justifyContent: 'center', alignItems: 'center', display: 'flex'}}
+                  >
                     <Box marginBottom={2} marginTop={1}>
                       <IconButton
                         sx={{
