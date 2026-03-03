@@ -1,7 +1,10 @@
 import { Box, Link } from "@mui/material"
 import { Stack, Typography } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 export function Explore() {
+  const navigate = useNavigate()
+  
   return (
     <>
       <Stack
@@ -34,7 +37,7 @@ export function Explore() {
           <Typography variant='subtitle2'>Oscar 2026</Typography>
         </Box>
 
-        <Link sx={{ marginTop: 1 }} href='/explore' variant='caption'>Mostrar mais</Link>
+        <Link sx={{ marginTop: 1, cursor: 'pointer' }} onClick={() => navigate('/explore')} variant='caption'>Mostrar mais</Link>
 
       </Stack>
     </>

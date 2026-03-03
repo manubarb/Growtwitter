@@ -12,13 +12,15 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { toggleTheme } from '../../store/slices/themesSlice'
 import { createTweet } from '../../store/slices/tweetSlice'
+import { useAuth } from '../../hooks/useAuth'
 
 export function SideBar() {
   const [tweet, setTweet] = useState('')
   const [ open, setOpen] = useState(false)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.tweets.user)
+  const { user } = useAuth()
+  const authUser = useAppSelector((state) => state.tweets.user)
 
   async function submitTweet(event: FormEvent){
     event.preventDefault()
@@ -161,7 +163,7 @@ export function SideBar() {
           display= 'flex'
           flexDirection= 'row'
           >
-            <Avatar alt="perfil" src={user?.imageUrl} sx={{ bgcolor: 'white' }}/>
+            <Avatar alt="perfil" src={authUser?.imageUrl} sx={{ bgcolor: 'white' }}/>
             
             <Stack
             marginLeft={1}
