@@ -1,5 +1,5 @@
 import { Box, Avatar, Stack, Typography, Grid, Divider, IconButton } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
@@ -91,7 +91,12 @@ export function TweetList(){
               marginTop={1}
               >
 
-                <Grid ><ChatBubbleOutlineOutlinedIcon fontSize="inherit"/></Grid>
+                <Grid >
+                  <IconButton>
+                    <ChatBubbleOutlineOutlinedIcon sx={{ width: 15, height: 15}} />
+                  </IconButton>
+                </Grid>
+
                 <Grid >
                   <IconButton
                   onClick={() => handleLike(tweet.id)}
@@ -102,6 +107,7 @@ export function TweetList(){
                     
                   </IconButton>
                   </Grid>
+                  
                 <Grid >
                   <IconButton 
                     onClick={() => handleRemoveTweet(tweet.id)}

@@ -1,15 +1,17 @@
-import { Box, AppBar, Toolbar, Typography, Avatar, Stack, Divider, Grid, CircularProgress } from "@mui/material"
+import { Box, AppBar, Toolbar, Typography, Avatar, Stack, Divider, Grid, CircularProgress, IconButton } from "@mui/material"
 import { useEffect } from "react"
 import ChatBubbleOutlineOutlinedIcon  from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { fetchTweets, loadUserData } from '../../store/slices/tweetSlice'
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
+import { fetchTweets, loadUserData, deleteTweet } from '../../store/slices/tweetSlice'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { useAuth } from "../../hooks/useAuth"
+import { toggleLike } from "../../store/slices/tweetSlice"
 
 export function Profile(){
     const dispatch = useAppDispatch()
-    const { list, loading, user: userAuth } = useAppSelector((state) => state.tweets)
+    const { list, loading, user: userAuth, isDeleted } = useAppSelector((state) => state.tweets)
     const { user } = useAuth()
 
     useEffect(() => {
@@ -19,6 +21,16 @@ export function Profile(){
       }
 
     }, [dispatch])
+
+    function handleRemoveTweet(id: string){
+      dispatch(deleteTweet(id))
+    }
+
+    function handleLike(tweetId: string){
+      if(user?.id){
+        dispatch(toggleLike({tweetId, userId: user.id}))
+      }
+    }
   
     return(
         <>
@@ -114,9 +126,35 @@ export function Profile(){
               marginTop={1}
               >
 
-                <Grid ><ChatBubbleOutlineOutlinedIcon fontSize="inherit"/></Grid>
-                <Grid ><FavoriteBorderOutlinedIcon fontSize="inherit"/></Grid>
-                <Grid ><DeleteOutlineOutlinedIcon fontSize="inherit"/></Grid>
+                <Grid >
+                  <IconButton>
+                    <ChatBubbleOutlineOutlinedIcon sx={{ width: 15, height: 15}} />
+                  </IconButton>
+                </Grid>
+
+                <Grid >
+                  <IconButton
+                  onClick={() => handleLike(tweet.id)}
+                  >
+                    {tweet.likes?.some(l => l.userId === user?.id) ? 
+                    (<FavoriteOutlinedIcon sx={{ width: 15, height: 15, color: 'red'}} />
+                    ) : (<FavoriteBorderOutlinedIcon sx={{ width: 15, height: 15}} />)}
+                    
+                  </IconButton>
+                  </Grid>
+                  
+                <Grid >
+                  <IconButton 
+                    onClick={() => handleRemoveTweet(tweet.id)}
+                    disabled={isDeleted.includes(tweet.id)} 
+                  >
+                    {isDeleted.includes(tweet.id) ? (
+                      <CircularProgress size={10} /> 
+                    ) : (
+                      <DeleteOutlineOutlinedIcon sx={{ width: 15, height: 15}}/>
+                    )}
+                  </IconButton>
+                </Grid>
 
               </Grid>
               </Stack>
