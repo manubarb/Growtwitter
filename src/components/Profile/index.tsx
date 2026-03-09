@@ -50,27 +50,34 @@ export function Profile(){
         </Box>
 
         <Box
-        position='relative'
         bgcolor='primary.main'
         height={150}
         />
 
-        <Box
-        position='absolute'
-        top={160}
-        left={560}
+        <Box 
+        sx={{
+          display: 'flex',
+          px: 2,
+          mt: -5, 
+        }}
         >
           <Avatar
           src={userAuth?.imageUrl}
-          sx={{ width: 100, height: 100, bgcolor: 'white' }}
+          sx={{ 
+            width: 100, 
+            height: 100, 
+            bgcolor: 'white',
+            border: '4px solid',
+            borderColor: 'background.paper'
+          }}
           />
         </Box>
 
         <Box
-        marginTop={7}
+        marginTop={1}
         >
             <Stack
-            marginLeft={1}
+            marginLeft={2}
             >
               <Typography noWrap variant='body2'>{user?.name}</Typography>
               <Typography variant='caption'>@{user?.username}</Typography>
