@@ -139,16 +139,26 @@ export function Profile(){
                   </IconButton>
                 </Grid>
 
-                <Grid >
+                <Grid display="flex" alignItems="center">
                   <IconButton
-                  onClick={() => handleLike(tweet.id)}
+                    size="small"
+                    onClick={() => handleLike(tweet.id)}
                   >
-                    {tweet.likes?.some(l => l.userId === user?.id) ? 
-                    (<FavoriteOutlinedIcon sx={{ width: 15, height: 15, color: 'red'}} />
-                    ) : (<FavoriteBorderOutlinedIcon sx={{ width: 15, height: 15}} />)}
-                    
+                    {tweet.likes?.some(l => l.userId === user?.id) ? (
+                      <FavoriteOutlinedIcon sx={{ width: 15, height: 15, color: 'red' }} />
+                    ) : (
+                      <FavoriteBorderOutlinedIcon sx={{ width: 15, height: 15 }} />
+                    )}
                   </IconButton>
-                  </Grid>
+                  <Typography 
+                    variant="caption" 
+                    sx={{  
+                        color: tweet.likes?.some(l => l.userId === user?.id) ? 'red' : 'inherit' 
+                    }}
+                  >
+                    {tweet.likes?.length || 0}
+                  </Typography>
+                </Grid>
                   
                 <Grid >
                   <IconButton 
